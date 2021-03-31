@@ -41,10 +41,3 @@ jobs:
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-  unit-tests:
-    - name: PHPUnit tests
-      uses: php-actions/phpunit@v2
-      with:
-        configuration: phpunit.xml
-        memory_limit: 256M
