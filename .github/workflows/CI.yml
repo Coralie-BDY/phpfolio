@@ -19,15 +19,6 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           tools: phpunit, phpstan, cs2pr, phpcs
 
-      - name: Run PHPStan
-        run: phpstan analyse src
-
-      - name: Run phpcs
-        run: phpcs -q --report=checkstyle src | cs2pr
-
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -42,9 +33,18 @@ jobs:
       - name: Install dependencies
         uses: php-actions/composer@v5
 
+      - name: Run PHPStan
+        run: phpstan -n analyse src
+
+      - name: Run phpcs
+        run: phpcs -q --report=checkstyle src | cs2pr
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
   unit-tests:
     - name: PHPUnit tests
       uses: php-actions/phpunit@v2
       with:
-        configuration: custom/path/to/phpunit.xml
+        configuration: phpunit.xml
         memory_limit: 256M
