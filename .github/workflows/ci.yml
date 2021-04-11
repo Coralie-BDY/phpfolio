@@ -34,7 +34,7 @@ jobs:
         uses: php-actions/composer@v5
 
       - name: Run PHPStan
-        run: phpstan -n analyse src
+        run: phpstan analyse src tests
 
       - name: Run phpcs
         run: phpcs -q --report=checkstyle src | cs2pr
