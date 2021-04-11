@@ -32,12 +32,3 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v5
-
-      - name: Run PHPStan
-        run: phpstan analyse src tests
-
-      - name: Run phpcs
-        run: phpcs -q --report=checkstyle src | cs2pr
-
-      - name: Setup problem matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
