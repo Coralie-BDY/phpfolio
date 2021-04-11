@@ -32,18 +32,3 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v5
-
-      - name: PHPStan Static Analysis
-        uses: php-actions/phpstan@v2
-        with:
-          path: src/
-
-      - name: PHPUnit
-        uses: pxgamer/phpunit-action@master
-        with:
-          command: tests/
-
-      - name: PHPCS check
-        uses: chekalsky/phpcs-action@v1
-        with:
-          phpcs_bin_path: "./vendor/bin/phpcs"
